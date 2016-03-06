@@ -114,7 +114,7 @@ func updateVirtualMachineResourceData(d *schema.ResourceData, vm *contegixclassi
 	d.Set("package_uuid", vm.PackageUUID)
 	d.Set("zone_name", vm.ZoneName)
 	d.Set("zone_uuid", vm.ZoneUUID)
-	d.set("vm_tools_status", vm.VMToolsStatus)
+	d.Set("vm_tools_status", vm.VMToolsStatus)
 
 	return nil
 }
@@ -133,12 +133,12 @@ func resourceVirtualMachineRead(d *schema.ResourceData, meta interface{}) error 
 func resourceVirtualMachineUpdate(d *schema.ResourceData, meta interface{}) error {
 	client := meta.(*contegixclassic.Client)
 
-	details = *contegixclassic.UpdateVirtualMachine{
-		PackageUUID: d.Get("package_uuid"),
+	details := &contegixclassic.UpdateVirtualMachine{
+		PackageUUID: d.Get("package_uuid").(string),
 	}
 	log.Printf("[DEBUG] Contegix Classic VM update configuration: %#v", details)
 
-	vm, err := client.UpdateRecord(d.Id(), details)
+	vm, err := client.UpdateVirtualMachine(d.Id(), details)
 	if err != nil {
 		return fmt.Errorf("Failed to update Contegix Classic VM: %s", err)
 	}
@@ -151,7 +151,7 @@ func resourceVirtualMachineDelete(d *schema.ResourceData, meta interface{}) erro
 
 	log.Printf("[INFO] Deleting Contegix Classic VM: %s", d.Id())
 
-	err := client.DestroyRecord(d.Id())
+	err := client.DeleteVirtualMachine(d.Id())
 
 	if err != nil {
 		return fmt.Errorf("Error deleting Contegix Classic VM: %s", err)

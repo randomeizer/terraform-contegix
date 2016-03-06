@@ -34,7 +34,7 @@ func (c *Config) defaultClient() (*contegixclassic.Client, error) {
 }
 
 func (c *Config) customClient() (*contegixclassic.Client, error) {
-	client, err := contegixclassic.NewCustomClient(c.AuthToken, c.CustomURL)
+	client, err := contegixclassic.NewCustomClient(c.AuthToken, *c.CustomURL)
 
 	if err != nil {
 		return nil, fmt.Errorf("Error setting up client: %s", err)

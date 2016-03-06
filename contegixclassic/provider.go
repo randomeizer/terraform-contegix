@@ -17,7 +17,7 @@ func Provider() terraform.ResourceProvider {
 			},
 			"custom_url": &schema.Schema{
 				Type:        schema.TypeString,
-				Required:    false,
+				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("CONTEGIX_CUSTOM_URL", nil),
 				Description: "A Custom base URL.",
 			},
@@ -32,9 +32,11 @@ func Provider() terraform.ResourceProvider {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
+	customUrl := d.Get("custom_url").(string)
+
 	config := Config{
 		AuthToken: d.Get("auth_token").(string),
-		CustomURL: d.Get("custom_url").(string),
+		CustomURL: &customUrl,
 	}
 
 	return config.Client()
