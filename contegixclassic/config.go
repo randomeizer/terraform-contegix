@@ -12,7 +12,7 @@ type Config struct {
 	CustomURL *string
 }
 
-// Client() returns a new client for accessing dnsimple.
+// Client() returns a new client for accessing Contegix Cloud 'Classic'.
 func (c *Config) Client() (*contegixclassic.Client, error) {
 	if c.CustomURL != nil {
 		return c.defaultClient()

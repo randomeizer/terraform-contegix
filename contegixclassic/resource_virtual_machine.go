@@ -1,4 +1,4 @@
-package dnsimple
+package contegixclassic
 
 import (
 	"fmt"
@@ -131,7 +131,7 @@ func resourceVirtualMachineRead(d *schema.ResourceData, meta interface{}) error 
 }
 
 func resourceVirtualMachineUpdate(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*dnsimple.Client)
+	client := meta.(*contegixclassic.Client)
 
 	details = *contegixclassic.UpdateVirtualMachine{
 		PackageUUID: d.Get("package_uuid"),
@@ -147,7 +147,7 @@ func resourceVirtualMachineUpdate(d *schema.ResourceData, meta interface{}) erro
 }
 
 func resourceVirtualMachineDelete(d *schema.ResourceData, meta interface{}) error {
-	client := meta.(*dnsimple.Client)
+	client := meta.(*contegixclassic.Client)
 
 	log.Printf("[INFO] Deleting Contegix Classic VM: %s", d.Id())
 
