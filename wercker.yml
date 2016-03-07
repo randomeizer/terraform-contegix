@@ -14,6 +14,7 @@ build:
         name: go test
         code: |
           go test ./...
+    - randomeizer/go-build-version
     - tcnksm/gox:
         os: "darwin linux windows"
         arch: "386 amd64"
@@ -22,7 +23,6 @@ build:
         output: ${WERCKER_OUTPUT_DIR}/dist
 deploy:
   steps:
-    - randomeizer/go-build-version
     - tcnksm/ghr:
         token: $GITHUB_TOKEN
         input: dist
@@ -30,7 +30,6 @@ deploy:
         pre_release: true
         replace: true
   dev:
-    - randomeizer/go-build-version
     - tcnksm/ghr:
         token: $GITHUB_TOKEN
         input: dist
@@ -38,7 +37,6 @@ deploy:
         pre_release: true
         replace: true
   release:
-    - randomeizer/go-build-version
     - tcnksm/ghr:
         token: $GITHUB_TOKEN
         input: dist
