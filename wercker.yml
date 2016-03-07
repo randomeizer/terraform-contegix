@@ -15,6 +15,10 @@ build:
         code: |
           go test ./...
     - randomeizer/go-build-version
+    - script:
+        name: check build version
+        code: |
+          echo "Build Version: $BUILD_VERSION"
     - tcnksm/gox:
         os: "darwin linux windows"
         arch: "386 amd64"
