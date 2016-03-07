@@ -26,8 +26,16 @@ deploy:
     - tcnksm/ghr:
         token: $GITHUB_TOKEN
         input: dist
-        version: ${BUILD_VERSION}
-        prerelease: true
+        version: ${BUILD_VERSION}-prerelease
+        pre_release: true
+        replace: true
+  dev:
+    - randomeizer/go-build-version
+    - tcnksm/ghr:
+        token: $GITHUB_TOKEN
+        input: dist
+        version: ${BUILD_VERSION}-alpha
+        pre_release: true
         replace: true
   release:
     - randomeizer/go-build-version
